@@ -7,7 +7,6 @@ export const auth = '/auth';
 // make api calls
 // url pointing to the backend route
 // const url = 'http://localhost:5000';
-// const url ='https://mern-memories-jsmastery.herokuapp.com'
 const url = process.env.REACT_APP_BACKEND_URL;
 
 const API = axios.create({ baseURL: url });
