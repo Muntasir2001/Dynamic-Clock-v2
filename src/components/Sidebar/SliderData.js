@@ -1,42 +1,31 @@
 const SliderData = [
-    {
-        image: '1.jpg',
-    },
-    {
-        image: '2.jpg',
-    },
-    {
-        image: '3.jpeg',
-    },
-    {
-        image: '4.jpg',
-    },
-    {
-        image: '5.png',
-    },
-    {
-        image: '6.jpg',
-    },
-    {
-        image: '7.png',
-    },
-    {
-        image: '8.jpg',
-    },
-    {
-        image: '9.png',
-    },
-    {
-        image: '10.png',
-    },
-   
-    {
-        image: '11.jpg',
-    },
-    {
-        image: '12.jpg',
-    },
-   
+    'afternoon.jpg',
+
+    'apocalypse.jpg',
+
+    'azurelights.jpg',
+
+    'battlefield.jpg',
+
+    'ceremony.jpg',
+
+    'mountains.png',
+
+    'owl.jpg',
+
+    'sekiro.png',
+
+    'sunset.jpeg',
+
+    'sunset2.jpg',
+
+    'tokyo.jpg',
+
+    'tree.jpg',
+
+    'volcanic.jpg',
+    
+    'waterfall.jpg',
 ];
 
 export default SliderData;

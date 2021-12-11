@@ -24,7 +24,7 @@ function App() {
 
     return (
         <>
-            <GlobalStyle wallpaper={wallpaper} />
+            <GlobalStyle wallpaper={wallpaper ? process.env.PUBLIC_URL + '/images/' + wallpaper : process.env.PUBLIC_URL + '/images/afternoon.jpg'} />
             <div>
                 <Sidebar showNav={showNav} setShowNav={setShowNav} />
                 <Routes>

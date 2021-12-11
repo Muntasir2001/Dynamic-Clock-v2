@@ -35,7 +35,7 @@ body {
 
 .right-arrow {
     position: absolute;
-    right: 10px;
+    right: 10%;
     font-size: 3rem;
     color: #000;
     z-index: 10;
@@ -45,7 +45,7 @@ body {
 
 .left-arrow {
     position: absolute;
-    left: 10px;
+    left: 10%;
     font-size: 3rem;
     color: #000;
     z-index: 10;
@@ -64,8 +64,8 @@ body {
 }
 
 .image {
-    max-width: 260px;
-    max-height: 260px;
+    max-width: 100%;
+    max-height: 150px;
     border-radius: 10px;
     object-fit: cover;
 }

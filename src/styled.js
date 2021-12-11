@@ -1,14 +1,12 @@
-import StarryMountain from './images/9.png';
-
 import { createGlobalStyle } from 'styled-components';
 
+// /* // background-image: url('${an image}'); //This works. :D  */
+// /* // background-image: url(${an image}); //This doesnt work  */
 const GlobalStyle = createGlobalStyle`
-
 body {
-    background-image: ${({ wallpaper }) =>
-        wallpaper ? `url('./images/${wallpaper}')` : `url('${StarryMountain}')`};
-    /* background-image: url('${StarryMountain}'); //This works. :D */
-    /* background-image: url(${StarryMountain}); //This doesnt work */
+    
+    background-image: ${({ wallpaper }) => `url('${wallpaper}')`};
+   
     background-repeat: no-repeat;
     background-size: cover;
     color: white;

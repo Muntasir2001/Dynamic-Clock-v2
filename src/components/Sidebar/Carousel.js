@@ -4,16 +4,31 @@ import { Slider } from './styled';
 import ChevronLeft from '../../svg/ChevronLeft';
 import ChevronRight from '../../svg/ChevronRight';
 import SliderData from './SliderData';
-
+import LoadingIcon from '../../svg/LoadingIcon';
 //* React
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setWallpaper } from '../../redux/actions/wallpaper';
 //* Redux
 
 const Carousel = () => {
     const [current, setCurrent] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
     const length = SliderData.length;
+
+    useEffect(() => {
+        checkImage(SliderData);
+    }, []);
+
+    const checkImage = async (srcArray) => {
+        srcArray.forEach((src) => {
+            const newImage = new Image();
+            newImage.src = process.env.PUBLIC_URL + `/images/${src}`;
+            window[src] = newImage;
+        });
+
+        setIsLoading(false);
+    };
 
     const dispatch = useDispatch();
     const handleImage = (image) => {
@@ -32,32 +47,36 @@ const Carousel = () => {
     if (!Array.isArray(SliderData) || SliderData.length <= 0) {
         return null;
     }
+
     return (
         <Slider>
-            <span className='left-arrow' onClick={prevSlide}>
-                <ChevronLeft />
-            </span>
-            <span className='right-arrow' onClick={nextSlide}>
-                <ChevronRight />
-            </span>
-            {SliderData.map((slide, index) => {
-                return (
-                    <div
-                        className={index === current ? 'slide active' : 'slide'}
-                        key={index}
-                    >
-                        {/* https://stackoverflow.com/questions/54317153/reactstrap-display-local-image-on-carousel */}
-                        {index === current && (
-                            <img
-                                src={`../../images/${slide.image}`}
-                                alt='travel'
-                                className='image'
-                                onClick={() => handleImage(slide.image)}
-                            />
-                        )}
-                    </div>
-                );
-            })}
+            {isLoading ? (
+                <LoadingIcon className='rotate' />
+            ) : (
+                <>
+                    <span className='left-arrow' onClick={prevSlide}>
+                        <ChevronLeft />
+                    </span>
+                    <span className='right-arrow' onClick={nextSlide}>
+                        <ChevronRight />
+                    </span>
+                    {SliderData.map((slide, index) => {
+                        return (
+                            <div className={index === current ? 'slide active' : 'slide'} key={index}>
+                                {/* https://stackoverflow.com/questions/54317153/reactstrap-display-local-image-on-carousel */}
+                                {index === current && (
+                                    <img
+                                        src={process.env.PUBLIC_URL + `/images/${slide}`}
+                                        alt='travel'
+                                        className='image'
+                                        onClick={() => handleImage(slide)}
+                                    />
+                                )}
+                            </div>
+                        );
+                    })}
+                </>
+            )}
         </Slider>
     );
 };

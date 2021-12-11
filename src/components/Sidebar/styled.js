@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+
 export const Container = styled.div`
     position: fixed;
     width: 300px;
@@ -50,9 +50,12 @@ export const LoginIconContainer = styled.div`
 // * Carousel
 export const Slider = styled.section`
     width: 260px;
+    max-height: 150px;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+
+    
 `;
