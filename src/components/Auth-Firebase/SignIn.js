@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useAuth } from '../../contexts/AuthContext';
-import Alert from '../../components/Auth-Firebase/Alert';
+import Alert from './Alert';
 import {
 	AuthFormParent,
 	AuthFormHeading,
@@ -11,23 +11,32 @@ import {
 	AuthFormLabel,
 	AuthFormInput,
 	AuthFormEmailDiv,
+	AuthFormPasswordDiv,
 	AuthFormSubmitBtn,
 	AuthFormBottomText,
-} from '../../components/Auth-Firebase/AuthFormComponents';
-import Success from '../../components/Auth-Firebase/Success';
+} from './AuthFormComponents';
 
-const ForgotPassword = () => {
+const SignIn = () => {
 	const [email, setEmail] = useState({ email: '' });
-	const [loading, setLoading] = useState(false);
+	const [password, setPassword] = useState({ password: '' });
 	const [error, setError] = useState(false);
-	const [success, setSuccess] = useState(false);
 	const [errorMssg, setErrorMssg] = useState('');
-	const [successMssg, setSuccessMssg] = useState('');
+	const [loading, setLoading] = useState(false);
 
-	const { resetPassword } = useAuth();
+	const history = useHistory();
+
+	const { signin } = useAuth();
 
 	const onEmailChange = (e) => {
 		setEmail(() => {
+			return {
+				[e.target.name]: e.target.value,
+			};
+		});
+	};
+
+	const onPasswordChange = (e) => {
+		setPassword(() => {
 			return {
 				[e.target.name]: e.target.value,
 			};
@@ -40,18 +49,16 @@ const ForgotPassword = () => {
 		try {
 			setError(false);
 			setLoading(true);
-			await resetPassword(email.email);
 
-			setSuccess(true);
-			setSuccessMssg('Check your inbox for further instruction.');
-			hideSuccessMssg();
+			await signin(email.email, password.password);
+			history.push('/');
 		} catch (err) {
 			setError(true);
-			setErrorMssg('Failed to reset password');
+			setErrorMssg('Cannot Sign In');
 			console.log(err);
 			hideErrorMssg();
 		}
-		console.log('outside error');
+
 		setLoading(false);
 	};
 
@@ -62,19 +69,11 @@ const ForgotPassword = () => {
 		}, 5000);
 	};
 
-	const hideSuccessMssg = () => {
-		setTimeout(() => {
-			setSuccess(false);
-			setSuccessMssg('');
-		}, 5000);
-	};
-
 	return (
 		<>
 			{error && <Alert mssg={errorMssg} />}
-			{success && <Success mssg={successMssg} />}
 			<AuthFormParent>
-				<AuthFormHeading>Reset Password</AuthFormHeading>
+				<AuthFormHeading>Sign In</AuthFormHeading>
 				<AuthForm onSubmit={onFormSubmit}>
 					<AuthFormEmailDiv>
 						<AuthFormLabel>Email</AuthFormLabel>
@@ -86,22 +85,32 @@ const ForgotPassword = () => {
 							required
 						/>
 					</AuthFormEmailDiv>
+					<AuthFormPasswordDiv>
+						<AuthFormLabel>Password</AuthFormLabel>
+						<AuthFormInput
+							type='password'
+							name='password'
+							value={password.password}
+							onChange={onPasswordChange}
+							required
+						/>
+					</AuthFormPasswordDiv>
 					<AuthFormSubmitBtn
 						disabled={loading}
 						type='submit'
 						name='submit'
-						value='Reset Password'
+						value='Sign In'
 					/>
-					<p className='forgot-password-sign-in'>
-						<Link to='/sign-in'>Sign In</Link>
-					</p>
 				</AuthForm>
+				<p>
+					Need an account?<Link to='/sign-up'> Sign Up</Link>
+				</p>
 			</AuthFormParent>
 			<AuthFormBottomText>
-				Need an account?<Link to='/sign-up'> Sign Up</Link>
+				Forgot password?<Link to='/forgot-password'> Click Here</Link>
 			</AuthFormBottomText>
 		</>
 	);
 };
 
-export default ForgotPassword;
+export default SignIn;

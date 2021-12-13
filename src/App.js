@@ -29,14 +29,15 @@ function App() {
 				wallpaper={
 					wallpaper
 						? process.env.PUBLIC_URL + '/images/' + wallpaper
-						: process.env.PUBLIC_URL + '/images/afternoon.jpg'
+						: process.env.PUBLIC_URL + '/images/tokyo.jpg'
 				}
 			/>
 			<AuthProvider>
 				<div>
 					<Sidebar showNav={showNav} setShowNav={setShowNav} />
 					<Routes>
-						<Route path='/' element={<Home showNav={showNav} />} />
+						<Route exact path='/' element={<Home showNav={showNav} />} />
+						<Route exact path='/auth' />
 						<Route
 							path='auth'
 							element={!user ? <Auth /> : <Navigate to={'/'} />}

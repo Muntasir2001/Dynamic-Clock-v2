@@ -3,8 +3,8 @@ import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAuth } from '../../contexts/AuthContext';
-import Alert from '../../components/Auth-Firebase/Alert';
-import Success from '../../components/Auth-Firebase/Success';
+import Alert from './Auth-Firebase/Alert';
+import Success from './Success';
 import {
 	AuthFormParent,
 	AuthFormHeading,
