@@ -4,6 +4,7 @@ import GlobalStyle from './styled';
 import Home from './components/Home/Home';
 import Sidebar from './components/Sidebar/Sidebar';
 import Auth from './components/Auth/Auth';
+import { AuthProvider } from './contexts/AuthContext';
 //* React
 import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
@@ -12,28 +13,39 @@ import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setWallpaper } from './redux/actions/wallpaper';
 function App() {
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(setWallpaper(JSON.parse(localStorage.getItem('wallpaper'))));
-    }, []);
-    const { wallpaper } = useSelector((state) => state.wallpaperReducer);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(setWallpaper(JSON.parse(localStorage.getItem('wallpaper'))));
+	}, []);
+	const { wallpaper } = useSelector((state) => state.wallpaperReducer);
 
-    const user = JSON.parse(localStorage.getItem('dynamicClockUser'));
+	const user = JSON.parse(localStorage.getItem('dynamicClockUser'));
 
-    const [showNav, setShowNav] = useState(false);
+	const [showNav, setShowNav] = useState(false);
 
-    return (
-        <>
-            <GlobalStyle wallpaper={wallpaper ? process.env.PUBLIC_URL + '/images/' + wallpaper : process.env.PUBLIC_URL + '/images/afternoon.jpg'} />
-            <div>
-                <Sidebar showNav={showNav} setShowNav={setShowNav} />
-                <Routes>
-                    <Route path='/' element={<Home showNav={showNav} />} />
-                    <Route path='auth' element={!user ? <Auth /> : <Navigate to={'/'} />} />
-                </Routes>
-            </div>
-        </>
-    );
+	return (
+		<>
+			<GlobalStyle
+				wallpaper={
+					wallpaper
+						? process.env.PUBLIC_URL + '/images/' + wallpaper
+						: process.env.PUBLIC_URL + '/images/afternoon.jpg'
+				}
+			/>
+			<AuthProvider>
+				<div>
+					<Sidebar showNav={showNav} setShowNav={setShowNav} />
+					<Routes>
+						<Route path='/' element={<Home showNav={showNav} />} />
+						<Route
+							path='auth'
+							element={!user ? <Auth /> : <Navigate to={'/'} />}
+						/>
+					</Routes>
+				</div>
+			</AuthProvider>
+		</>
+	);
 }
 
 export default App;
