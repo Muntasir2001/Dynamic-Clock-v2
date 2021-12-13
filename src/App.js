@@ -12,11 +12,14 @@ import { Navigate } from 'react-router-dom';
 //* Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { setWallpaper } from './redux/actions/wallpaper';
+
 function App() {
 	const dispatch = useDispatch();
+
 	useEffect(() => {
 		dispatch(setWallpaper(JSON.parse(localStorage.getItem('wallpaper'))));
 	}, []);
+
 	const { wallpaper } = useSelector((state) => state.wallpaperReducer);
 
 	const user = JSON.parse(localStorage.getItem('dynamicClockUser'));
