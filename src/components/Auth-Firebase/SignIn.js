@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../../contexts/AuthContext';
 import Alert from './Alert';
@@ -23,7 +23,7 @@ const SignIn = () => {
 	const [errorMssg, setErrorMssg] = useState('');
 	const [loading, setLoading] = useState(false);
 
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	const { signin } = useAuth();
 
@@ -51,7 +51,7 @@ const SignIn = () => {
 			setLoading(true);
 
 			await signin(email.email, password.password);
-			history.push('/');
+			navigate('./');
 		} catch (err) {
 			setError(true);
 			setErrorMssg('Cannot Sign In');

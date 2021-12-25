@@ -4,6 +4,9 @@ import GlobalStyle from './styled';
 import Home from './components/Home/Home';
 import Sidebar from './components/Sidebar/Sidebar';
 import Auth from './components/Auth/Auth';
+import SignIn from './components/Auth-Firebase/SignIn';
+import SignUp from './components/Auth-Firebase/SignUp';
+import ForgotPassword from './components/Auth-Firebase/ForgotPassword';
 import { AuthProvider } from './contexts/AuthContext';
 //* React
 import { useState, useEffect } from 'react';
@@ -39,12 +42,13 @@ function App() {
 				<div>
 					<Sidebar showNav={showNav} setShowNav={setShowNav} />
 					<Routes>
-						<Route exact path='/' element={<Home showNav={showNav} />} />
-						<Route exact path='/auth' />
+						<Route path='/' element={<Home showNav={showNav} />} />
+						<Route path='sign-up' element={<SignUp />} />
 						<Route
-							path='auth'
-							element={!user ? <Auth /> : <Navigate to={'/'} />}
+							path='sign-in'
+							element={!user ? <SignIn /> : <Navigate to={'/'} />}
 						/>
+						<Route path='forgot-password' element={<ForgotPassword />} />
 					</Routes>
 				</div>
 			</AuthProvider>
