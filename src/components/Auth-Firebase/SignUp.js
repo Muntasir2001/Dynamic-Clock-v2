@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../../contexts/AuthContext';
 import Alert from './Alert';
@@ -15,6 +15,8 @@ import {
 	AuthFormPasswordDiv,
 	AuthFormSubmitBtn,
 } from '../../components/Auth-Firebase/AuthFormComponents';
+import { useDispatch } from 'react-redux';
+import { signUp } from '../../redux/actions/auth';
 
 const SignUp = () => {
 	const [email, setEmail] = useState({ email: '' });
@@ -26,6 +28,9 @@ const SignUp = () => {
 	const [loading, setLoading] = useState(false);
 
 	const { signup } = useAuth();
+
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const confirmPasswordRef = useRef();
 
@@ -68,6 +73,8 @@ const SignUp = () => {
 				setSuccessMssg(true);
 				setSuccessMssg('Sign Up successful!');
 				hideSuccessMssg();
+
+				dispatch(signUp(email, navigate));
 			} catch (err) {
 				setErrorMssg(err);
 				console.log(err);
@@ -95,8 +102,8 @@ const SignUp = () => {
 			{error && <Alert mssg={errorMssg} />}
 			{success && <Success mssg={successMssg} />}
 			<AuthFormParent>
-				<AuthFormHeading>Sign Up</AuthFormHeading>
 				<AuthForm onSubmit={onFormSubmit}>
+					<AuthFormHeading>Sign Up</AuthFormHeading>
 					<AuthFormEmailDiv>
 						<AuthFormLabel>Email</AuthFormLabel>
 						<AuthFormInput
@@ -132,10 +139,10 @@ const SignUp = () => {
 						name='submit'
 						value='Enter'
 					/>
+					<p>
+						Already have an account?<Link to='/sign-in'>Sign In</Link>
+					</p>
 				</AuthForm>
-				<p>
-					Already have an account?<Link to='/sign-in'>Sign In</Link>
-				</p>
 			</AuthFormParent>
 		</>
 	);

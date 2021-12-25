@@ -3,7 +3,7 @@ import GlobalStyle from './styled';
 //* Components
 import Home from './components/Home/Home';
 import Sidebar from './components/Sidebar/Sidebar';
-import Auth from './components/Auth/Auth';
+// import Auth from './components/Auth/Auth';
 import SignIn from './components/Auth-Firebase/SignIn';
 import SignUp from './components/Auth-Firebase/SignUp';
 import ForgotPassword from './components/Auth-Firebase/ForgotPassword';

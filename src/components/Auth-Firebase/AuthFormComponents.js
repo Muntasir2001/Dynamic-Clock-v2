@@ -5,13 +5,13 @@ export const AuthFormParent = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	color: #1e1e1e;
-	border: 1px solid #999999;
-	border-radius: 10px;
+	color: #fff;
+
 	max-width: 500px;
-	padding: 30px 20px;
 	margin: auto;
-	margin-top: 100px;
+
+	z-index: -10;
+	/* margin-top: 100px; */
 	& p {
 		margin-top: 15px;
 	}
@@ -33,9 +33,10 @@ export const AuthFormParent = styled.div`
 `;
 
 export const AuthForm = styled.form`
-	margin-top: 40px;
-	max-width: 400px;
-	margin: 20px;
+	padding: 60px;
+	background: #1e1e1e;
+	margin-top: 30px;
+	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
 	& p {
@@ -45,7 +46,8 @@ export const AuthForm = styled.form`
 
 export const AuthFormHeading = styled.h1`
 	display: block;
-	padding: 0px auto;
+	margin-bottom: 30px;
+	text-align: center;
 `;
 
 export const AuthFormLabel = styled.label`
@@ -70,6 +72,7 @@ export const AuthFormPasswordDiv = styled.div`
 
 export const AuthFormSubmitBtn = styled(AuthFormInput)`
 	margin-top: 30px;
+	margin-bottom: 20px;
 	background-color: #006ee5;
 	border-color: #006ee5;
 	color: #fff;

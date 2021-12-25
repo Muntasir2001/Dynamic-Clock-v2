@@ -15,6 +15,8 @@ import {
 	AuthFormSubmitBtn,
 	AuthFormBottomText,
 } from './AuthFormComponents';
+import { useDispatch } from 'react-redux';
+import { signIn } from '../../redux/actions/auth';
 
 const SignIn = () => {
 	const [email, setEmail] = useState({ email: '' });
@@ -24,6 +26,7 @@ const SignIn = () => {
 	const [loading, setLoading] = useState(false);
 
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const { signin } = useAuth();
 
@@ -51,7 +54,8 @@ const SignIn = () => {
 			setLoading(true);
 
 			await signin(email.email, password.password);
-			navigate('./');
+
+			dispatch(signIn(email, navigate));
 		} catch (err) {
 			setError(true);
 			setErrorMssg('Cannot Sign In');
@@ -73,8 +77,8 @@ const SignIn = () => {
 		<>
 			{error && <Alert mssg={errorMssg} />}
 			<AuthFormParent>
-				<AuthFormHeading>Sign In</AuthFormHeading>
 				<AuthForm onSubmit={onFormSubmit}>
+					<AuthFormHeading>Sign In</AuthFormHeading>
 					<AuthFormEmailDiv>
 						<AuthFormLabel>Email</AuthFormLabel>
 						<AuthFormInput
@@ -101,10 +105,10 @@ const SignIn = () => {
 						name='submit'
 						value='Sign In'
 					/>
+					<p>
+						Need an account?<Link to='/sign-up'> Sign Up</Link>
+					</p>
 				</AuthForm>
-				<p>
-					Need an account?<Link to='/sign-up'> Sign Up</Link>
-				</p>
 			</AuthFormParent>
 			<AuthFormBottomText>
 				Forgot password?<Link to='/forgot-password'> Click Here</Link>
