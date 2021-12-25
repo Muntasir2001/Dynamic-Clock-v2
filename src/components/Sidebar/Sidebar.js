@@ -17,9 +17,14 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../redux/actions/auth';
 
+import { useAuth } from '../../contexts/AuthContext';
+
 const Sidebar = ({ showNav, setShowNav }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+
+	const { signout } = useAuth();
+
 	const handleNav = () => {
 		setShowNav((prev) => !prev);
 	};
@@ -29,9 +34,10 @@ const Sidebar = ({ showNav, setShowNav }) => {
 	const handleAuth = () => {
 		if (user) {
 			dispatch(logout());
+			signout();
 			navigate('/');
 		} else {
-			navigate('./sign-in');
+			navigate('/sign-in');
 		}
 	};
 

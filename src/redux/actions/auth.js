@@ -1,35 +1,35 @@
-import * as api from '../../api';
+// import * as api from '../../api';
 
 export const authConstants = {
-    AUTH: 'AUTH',
-    LOGOUT: 'LOGOUT',
+	AUTH: 'AUTH',
+	LOGOUT: 'LOGOUT',
 };
 
 //* Action Creators
 export const logout = () => ({
-    type: authConstants.LOGOUT,
+	type: authConstants.LOGOUT,
 });
 
 export const signUp = (formData, navigate) => async (dispatch) => {
-    try {
-        const { data } = await api.signUp(formData);
+	try {
+		// const { data } = await api.signUp(formData);
 
-        dispatch({ type: authConstants.AUTH, data });
+		dispatch({ type: authConstants.AUTH, formData });
 
-        navigate('/');
-    } catch (error) {
-        console.log(error);
-    }
+		navigate('/');
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 export const signIn = (formData, navigate) => async (dispatch) => {
-    try {
-        const { data } = await api.signIn(formData);
+	try {
+		// const { data } = await api.signIn(formData);
 
-        dispatch({ type: authConstants.AUTH, data });
+		dispatch({ type: authConstants.AUTH, formData });
 
-        navigate('/');
-    } catch (error) {
-        console.log(error);
-    }
+		navigate('/');
+	} catch (error) {
+		console.log(error);
+	}
 };

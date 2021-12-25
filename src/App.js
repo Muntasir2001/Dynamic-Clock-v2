@@ -44,10 +44,7 @@ function App() {
 					<Routes>
 						<Route path='/' element={<Home showNav={showNav} />} />
 						<Route path='sign-up' element={<SignUp />} />
-						<Route
-							path='sign-in'
-							element={!user ? <SignIn /> : <Navigate to={'/'} />}
-						/>
+						<Route path='sign-in' element={<SignIn />} />
 						<Route path='forgot-password' element={<ForgotPassword />} />
 					</Routes>
 				</div>

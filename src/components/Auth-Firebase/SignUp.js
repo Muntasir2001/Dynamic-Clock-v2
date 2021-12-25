@@ -140,7 +140,7 @@ const SignUp = () => {
 						value='Enter'
 					/>
 					<p>
-						Already have an account?<Link to='/sign-in'>Sign In</Link>
+						Already have an account? <Link to='/sign-in'>Sign In</Link>
 					</p>
 				</AuthForm>
 			</AuthFormParent>
