@@ -108,11 +108,11 @@ const SignIn = () => {
 					<p>
 						Need an account?<Link to='/sign-up'> Sign Up</Link>
 					</p>
+					<AuthFormBottomText>
+						Forgot password?<Link to='/forgot-password'> Click Here</Link>
+					</AuthFormBottomText>
 				</AuthForm>
 			</AuthFormParent>
-			<AuthFormBottomText>
-				Forgot password?<Link to='/forgot-password'> Click Here</Link>
-			</AuthFormBottomText>
 		</>
 	);
 };
